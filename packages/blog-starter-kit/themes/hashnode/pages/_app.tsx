@@ -5,24 +5,19 @@ import 'tailwindcss/tailwind.css'
 import '../styles/index.css';
 import { GlobalFontVariables } from '../components/fonts';
 import { getUrqlClientConfig } from '../lib/api/client';
-import { ThemeProvider } from 'next-themes'
+
 import { Fragment } from 'react';
+import { ThemeProvider } from 'next-themes'
 
 function MyApp({ Component, pageProps }: AppProps) {
 	return (
 		<Fragment>
-			 <GlobalFontVariables />
-			 <Component {...pageProps} />
-		</Fragment>
+      <ThemeProvider attribute="class">
+        <GlobalFontVariables />
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </Fragment>
 	);
-}
-
-export default function MyApp({ Component, pageProps }: AppProps) {
-        return (
-        <ThemeProvider attribute="class">
-            <Component {...pageProps} />
-        </ThemeProvider>
-    );
 }
 
 // `withUrqlClient` HOC provides the `urqlClient` prop and takes care of restoring cache from urqlState
