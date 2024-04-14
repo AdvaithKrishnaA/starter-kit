@@ -7,6 +7,7 @@ import HeaderLeftSidebar from './header-left-sidebar';
 import PublicationLogo from './publication-logo';
 import PublicationNavLinks from './publication-nav-links';
 import PublicationSocialLinks from './publication-social-links';
+import ThemeSwitch from './theme-switcher';
 
 type Props = {
 	currentMenuId?: string | null;
@@ -43,6 +44,7 @@ export const Header = (props: Props) => {
 						)}
 					>
 						<HeaderBlogSearch publication={publication} />
+            <ThemeSwitch/> 
 					</div>
 				</div>
 
