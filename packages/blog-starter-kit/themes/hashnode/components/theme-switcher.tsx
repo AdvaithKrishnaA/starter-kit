@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 
 import MoonSVG from './icons/svgs/MoonSVG';
 import SunSVG from './icons/svgs/SunSVG';
+import CommonHeaderIconBtn from './common-header-icon-btn';
 
 // const ThemeSwitch = () => {
 //     const [mounted, setMounted] = useState(false);
