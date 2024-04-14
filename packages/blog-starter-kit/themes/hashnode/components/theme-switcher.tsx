@@ -20,7 +20,8 @@ const ThemeSwitch = () => {
     return (
      <>
        <button
-          className={'button-theme-switcher')}
+          className={'button-theme-switcher'}
+          tooltipText={'Toggle theme'}
           onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
             <SunSVG className="h-[1.5rem] w-[1.3rem] dark:hidden" />
             <MoonSVG className="hidden h-5 w-5 dark:block" />
