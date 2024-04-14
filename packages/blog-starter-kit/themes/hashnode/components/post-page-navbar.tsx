@@ -14,6 +14,7 @@ import useStickyNavScroll from './use-sticky-nav-scroll';
 import { PublicationFragment } from '../generated/graphql';
 import { Button } from './custom-button';
 import PublicationLogo from './publication-logo';
+import ThemeSwitch from './theme-switcher'
 
 type Props = {
 	publication: Pick<PublicationFragment, 'id' | 'title' | 'links' | 'url' | 'features' | 'isTeam' | 'author' | 'preferences'>;
