@@ -5,7 +5,7 @@ import 'tailwindcss/tailwind.css'
 import '../styles/index.css';
 import { GlobalFontVariables } from '../components/fonts';
 import { getUrqlClientConfig } from '../lib/api/client';
-
+import { ThemeProvider } from 'next-themes'
 import { Fragment } from 'react';
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -14,6 +14,9 @@ function MyApp({ Component, pageProps }: AppProps) {
 			 <GlobalFontVariables />
 			 <Component {...pageProps} />
 		</Fragment>
+    <ThemeProvider attribute="class">
+            <Component {...pageProps} />
+    </ThemeProvider>
 	);
 }
 
