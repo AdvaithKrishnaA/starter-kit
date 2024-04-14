@@ -30,8 +30,6 @@ import CommonHeaderIconBtn from './common-header-icon-btn';
 //     );
 // };
 
-// export default ThemeSwitch;
-
 const ThemeSwitch = () => {
 const [mounted, setMounted] = useState(false);
 const { theme, setTheme } = useTheme();
@@ -51,3 +49,5 @@ return (
 </CommonHeaderIconBtn>
 );
 };
+
+export default ThemeSwitch;
