@@ -129,8 +129,7 @@ function PublicationLogo(props: PublicationLogoProps) {
   }
   const useLogo = false || preferences.logo;
   if (useLogo) {
-    // const logoSrc = false ? preferences.darkMode?.logo : preferences.logo;
-    const logoSrc = preferences.darkMode?.logo || preferences.logo;
+    const logoSrc = false ? preferences.darkMode?.logo : preferences.logo;
     return (
       <CustomLogo
         publication={publication}
