@@ -198,7 +198,7 @@ const CustomLogo = ({
 }) => {
   const { theme } = useTheme();
   const blogTitle = generateBlogTitleWithoutDisplayTitle(publication);
-  const fillColor = theme === 'dark' ? 'white' : 'black';
+  const fillColor = theme === 'dark' ? '#FFFFFF' : '#000000';
 
   return (
     <h1 className="blog-main-logo">
