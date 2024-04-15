@@ -102,7 +102,7 @@ function PostView(props: any) {
                     <ProfileImage user={post.author} width="200" height="200" hoverDisabled={props.isPublicationPost} />
                     </div>
                     <a
-                    href={`https://hashnode.com/@${post.author.username}`}
+                    href={`https://www.linkedin.com/in/advaithkrishnaa/`}
                     className="font-medium text-slate-900 dark:text-white"
                     >
                     <span>{post.author.name}</span>
