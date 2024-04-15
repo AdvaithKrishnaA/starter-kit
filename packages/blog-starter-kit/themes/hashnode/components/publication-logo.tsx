@@ -31,19 +31,55 @@ const logoSizes = {
   xl: 'w-64',
 } as const;
 
-const CustomLogo = ({ publication, logoSrc, size = 'lg', isPostPage }: {
+// const CustomLogo = ({ publication, logoSrc, size = 'lg', isPostPage }: {
+//   publication: Pick<PublicationFragment, 'title'> & {
+//     author: Pick<User, 'name'>;
+//   } & {
+//     preferences: Pick<Preferences, 'darkMode'>;
+//   };
+//   logoSrc: Maybe<string> | undefined;
+//   size?: 'xs' | 'sm' | 'lg' | 'xl';
+//   isPostPage?: boolean | null;
+// }) => {
+//   const { theme } = useTheme();
+//   const blogTitle = generateBlogTitleWithoutDisplayTitle(publication);
+//   const darkLogoSrc = publication.preferences.darkMode?.logo;
+
+//   return (
+//     <h1 className="blog-main-logo">
+//       <Link
+//         className={twJoin(
+//           'blog-logo focus-ring-base flex flex-row items-center', 'focus-ring-colors-base',
+//           logoSizes[size],
+//         )}
+//         aria-label={`${blogTitle} home page`}
+//         href={`/${isPostPage ? '?source=top_nav_blog_home' : ''}`}
+//       >
+//         <CustomImage
+//           priority
+//           className="block w-full"
+//           src={resizeImage(theme === 'dark' && darkLogoSrc ? darkLogoSrc : logoSrc, { w: 903.95, h: 250, c: 'thumb' })}
+//           originalSrc={theme === 'dark' && darkLogoSrc ? darkLogoSrc : logoSrc || ''}
+//           width={1000}
+//           height={250}
+//           alt={blogTitle}
+//         />
+//       </Link>
+//     </h1>
+//   );
+// };
+
+const CustomLogo = ({ publication, logoSrc, darkLogoSrc, size = 'lg', isPostPage }: {
   publication: Pick<PublicationFragment, 'title'> & {
     author: Pick<User, 'name'>;
-  } & {
-    preferences: Pick<Preferences, 'darkMode'>;
   };
   logoSrc: Maybe<string> | undefined;
+  darkLogoSrc: Maybe<string> | undefined;
   size?: 'xs' | 'sm' | 'lg' | 'xl';
   isPostPage?: boolean | null;
 }) => {
   const { theme } = useTheme();
   const blogTitle = generateBlogTitleWithoutDisplayTitle(publication);
-  const darkLogoSrc = publication.preferences.darkMode?.logo;
 
   return (
     <h1 className="blog-main-logo">
@@ -58,8 +94,8 @@ const CustomLogo = ({ publication, logoSrc, size = 'lg', isPostPage }: {
         <CustomImage
           priority
           className="block w-full"
-          src={resizeImage(theme === 'dark' && darkLogoSrc ? darkLogoSrc : logoSrc, { w: 903.95, h: 250, c: 'thumb' })}
-          originalSrc={theme === 'dark' && darkLogoSrc ? darkLogoSrc : logoSrc || ''}
+          src={resizeImage(theme === 'dark' ? darkLogoSrc : logoSrc, { w: 903.95, h: 250, c: 'thumb' })}
+          originalSrc={theme === 'dark' ? darkLogoSrc || '' : logoSrc || ''}
           width={1000}
           height={250}
           alt={blogTitle}
