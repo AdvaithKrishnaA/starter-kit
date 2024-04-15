@@ -121,13 +121,13 @@ function PublicationLogo(props: PublicationLogoProps) {
   const { publication, size, withProfileImage, isPostPage } = props;
   const { preferences } = publication;
   const { theme } = useTheme();
-  const darkLogoSrc = publication.preferences.darkMode!.logo;
 
   if (!publication) {
     return null;
   }
   const useLogo = false || preferences.logo;
   if (useLogo) {
+    const darkLogoSrc = preferences.darkMode.logo;
     const logoSrc = preferences.logo;
     return (
       <CustomLogo
