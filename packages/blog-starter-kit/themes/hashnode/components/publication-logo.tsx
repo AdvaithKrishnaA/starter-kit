@@ -130,7 +130,7 @@ function PublicationLogo(props: PublicationLogoProps) {
     return (
       <CustomLogo
         publication={publication}
-        logoSrc={logoSrc}
+        logoSrc={theme === 'dark' ? darkLogoSrc : logoSrc}
         size={size}
         isPostPage={isPostPage}
       />
