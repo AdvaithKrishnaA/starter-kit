@@ -101,7 +101,7 @@ const FeaturedPosts = (props: {
               )}
               <div className="blog-article-card-author-strip mx-4 flex flex-row flex-wrap items-center">
                 <a
-                  href={`https://www.linkedin.com/in/advaithkrishnaa/`}
+                  href={`@${links.youtube}`}
                   className="blog-article-card-author-photo mr-2 block h-8 w-8 overflow-hidden rounded-full bg-slate-100 dark:border-slate-800 dark:bg-slate-900"
                 >
                   <Image
@@ -115,7 +115,7 @@ const FeaturedPosts = (props: {
                 <div className="flex flex-col items-start leading-snug">
                   <a
                     className="blog-article-card-author-name block font-semibold text-slate-700 dark:text-slate-400"
-                    href={`https://www.linkedin.com/in/advaithkrishnaa/`}
+                    href={`@${links.youtube}`}
                   >
                     {post.author.name}
                   </a>
