@@ -4,6 +4,7 @@ import { resizeImage, getBlurHash } from '../utils/image';
 import { Preferences, User, Maybe, PublicationFragment } from '../generated/graphql';
 import { twJoin } from 'tailwind-merge';
 import { generateBlogTitleWithoutDisplayTitle } from '../utils/commonUtils';
+import { useTheme } from 'next-themes';
 
 type PublicationLogoProps = {
   publication: Pick<PublicationFragment, 'title' | 'isTeam'> & {
@@ -30,26 +31,25 @@ const logoSizes = {
   xl: 'w-64',
 } as const;
 
-const CustomLogo = ({
-  publication,
-  logoSrc,
-  size = 'lg',
-  isPostPage,
-}: {
+const CustomLogo = ({ publication, logoSrc, size = 'lg', isPostPage }: {
   publication: Pick<PublicationFragment, 'title'> & {
     author: Pick<User, 'name'>;
+  } & {
+    preferences: Pick<Preferences, 'darkMode'>;
   };
   logoSrc: Maybe<string> | undefined;
   size?: 'xs' | 'sm' | 'lg' | 'xl';
   isPostPage?: boolean | null;
 }) => {
+  const { theme } = useTheme();
   const blogTitle = generateBlogTitleWithoutDisplayTitle(publication);
+  const darkLogoSrc = publication.preferences.darkMode?.logo;
 
   return (
     <h1 className="blog-main-logo">
       <Link
         className={twJoin(
-          'blog-logo focus-ring-base flex flex-row items-center','focus-ring-colors-base',
+          'blog-logo focus-ring-base flex flex-row items-center', 'focus-ring-colors-base',
           logoSizes[size],
         )}
         aria-label={`${blogTitle} home page`}
@@ -58,8 +58,8 @@ const CustomLogo = ({
         <CustomImage
           priority
           className="block w-full"
-          src={resizeImage(logoSrc, { w: 1000, h: 250, c: 'thumb' })}
-          originalSrc={logoSrc || ''}
+          src={resizeImage(theme === 'dark' && darkLogoSrc ? darkLogoSrc : logoSrc, { w: 1000, h: 250, c: 'thumb' })}
+          originalSrc={theme === 'dark' && darkLogoSrc ? darkLogoSrc : logoSrc || ''}
           width={1000}
           height={250}
           alt={blogTitle}
@@ -129,7 +129,7 @@ function PublicationLogo(props: PublicationLogoProps) {
   }
   const useLogo = false || preferences.logo;
   if (useLogo) {
-    const logoSrc = false ? preferences.darkMode?.logo : preferences.logo;
+    const logoSrc = preferences.logo;
     return (
       <CustomLogo
         publication={publication}
