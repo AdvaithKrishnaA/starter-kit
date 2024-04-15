@@ -204,7 +204,7 @@ const CustomLogo = ({
           logoSizes[size],
         )}
         aria-label={`${blogTitle} home page`}
-        href={`/${isPostPage ? '?source=top_nav_blog_home' : ''}`}
+        href={`/${isPostPage ? '' : ''}`}
       >
         <svg
           width="100%"
