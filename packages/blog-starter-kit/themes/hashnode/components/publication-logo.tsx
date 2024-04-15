@@ -1,6 +1,5 @@
 // components/publication-logo.tsx
 
-import { useEffect } from 'react';
 import { useTheme } from 'next-themes';
 import CustomImage from './custom-image';
 import Link from 'next/link';
@@ -44,23 +43,9 @@ const CustomLogo = ({ publication, logoSrc, size = 'lg', isPostPage }: {
   size?: 'xs' | 'sm' | 'lg' | 'xl';
   isPostPage?: boolean | null;
 }) => {
-  const { theme, setTheme } = useTheme();
+  const { theme } = useTheme();
   const blogTitle = generateBlogTitleWithoutDisplayTitle(publication);
   const darkLogoSrc = publication.preferences.darkMode?.logo;
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    const handleChange = (event: MediaQueryListEvent) => {
-      setTheme(event.matches ? 'dark' : 'light');
-    };
-
-    mediaQuery.addEventListener('change', handleChange);
-    setTheme(mediaQuery.matches ? 'dark' : 'light');
-
-    return () => {
-      mediaQuery.removeEventListener('change', handleChange);
-    };
-  }, [setTheme]);
 
   return (
     <h1 className="blog-main-logo">
@@ -75,7 +60,7 @@ const CustomLogo = ({ publication, logoSrc, size = 'lg', isPostPage }: {
         <CustomImage
           priority
           className="block w-full"
-          src={resizeImage(theme === 'dark' && darkLogoSrc ? darkLogoSrc : logoSrc, { w: 1000, h: 250, c: 'thumb' })}
+          src={resizeImage(theme === 'dark' && darkLogoSrc ? darkLogoSrc : logoSrc, { w: 903.95, h: 250, c: 'thumb' })}
           originalSrc={theme === 'dark' && darkLogoSrc ? darkLogoSrc : logoSrc || ''}
           width={1000}
           height={250}
