@@ -28,9 +28,9 @@ export const addArticleJsonLd = (publication: any, post: any) => {
 				dateModified: post.updatedAt,
 				author: {
 					'@type': 'Person',
-					'@id': `https://hashnode.com/@${post.author?.username}`,
+					'@id': `https://www.linkedin.com/in/advaithkrishnaa/`,
 					name: post.author?.name,
-					url: `https://hashnode.com/@${post.author?.username}`,
+					url: `https://www.linkedin.com/in/advaithkrishnaa/`,
 				},
 				image: {
 					'@type': 'ImageObject',
