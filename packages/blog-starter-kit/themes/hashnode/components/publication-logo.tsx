@@ -1,35 +1,36 @@
-import CustomImage from './custom-image';
-import Link from 'next/link';
-import { resizeImage, getBlurHash } from '../utils/image';
-import { Preferences, User, Maybe, PublicationFragment } from '../generated/graphql';
-import { twJoin } from 'tailwind-merge';
-import { generateBlogTitleWithoutDisplayTitle } from '../utils/commonUtils';
-import { useTheme } from 'next-themes';
+// import CustomImage from './custom-image';
+// import Link from 'next/link';
+// import { resizeImage, getBlurHash } from '../utils/image';
+// import { Preferences, User, Maybe, PublicationFragment } from '../generated/graphql';
+// import { twJoin } from 'tailwind-merge';
+// import { generateBlogTitleWithoutDisplayTitle } from '../utils/commonUtils';
+// import { useTheme } from 'next-themes';
+// import { useEffect } from 'react';
 
-type PublicationLogoProps = {
-  publication: Pick<PublicationFragment, 'title' | 'isTeam'> & {
-    author: Pick<User, 'username' | 'name' | 'profilePicture'>;
-  } & {
-    preferences: Pick<Preferences, 'logo' | 'darkMode'>;
-  };
-  size?: 'xs' | 'sm' | 'lg' | 'xl';
-  withProfileImage?: boolean;
-  isPostPage?: boolean | null;
-};
+// type PublicationLogoProps = {
+//   publication: Pick<PublicationFragment, 'title' | 'isTeam'> & {
+//     author: Pick<User, 'username' | 'name' | 'profilePicture'>;
+//   } & {
+//     preferences: Pick<Preferences, 'logo' | 'darkMode'>;
+//   };
+//   size?: 'xs' | 'sm' | 'lg' | 'xl';
+//   withProfileImage?: boolean;
+//   isPostPage?: boolean | null;
+// };
 
-const textStyles = {
-  xs: 'text-base text-left',
-  sm: 'text-lg md:text-xl text-left',
-  lg: 'text-xl md:text-2xl text-left',
-  xl: 'text-2xl text-center',
-} as const;
+// const textStyles = {
+//   xs: 'text-base text-left',
+//   sm: 'text-lg md:text-xl text-left',
+//   lg: 'text-xl md:text-2xl text-left',
+//   xl: 'text-2xl text-center',
+// } as const;
 
-const logoSizes = {
-  xs: 'w-44',
-  sm: 'w-44',
-  lg: 'w-64',
-  xl: 'w-64',
-} as const;
+// const logoSizes = {
+//   xs: 'w-44',
+//   sm: 'w-44',
+//   lg: 'w-64',
+//   xl: 'w-64',
+// } as const;
 
 // const CustomLogo = ({ publication, logoSrc, size = 'lg', isPostPage }: {
 //   publication: Pick<PublicationFragment, 'title'> & {
@@ -69,92 +70,56 @@ const logoSizes = {
 //   );
 // };
 
-const CustomLogo = ({ publication, logoSrc, darkLogoSrc, size = 'lg', isPostPage }: {
-  publication: Pick<PublicationFragment, 'title'> & {
-    author: Pick<User, 'name'>;
-  };
-  logoSrc: Maybe<string> | undefined;
-  darkLogoSrc: Maybe<string> | undefined;
-  size?: 'xs' | 'sm' | 'lg' | 'xl';
-  isPostPage?: boolean | null;
-}) => {
-  const { theme } = useTheme();
-  const blogTitle = generateBlogTitleWithoutDisplayTitle(publication);
+// const DefaultLogo = ({
+//   publication,
+//   size = 'lg',
+//   withProfileImage = false,
+//   isPostPage,
+// }: {
+//   publication: Pick<PublicationFragment, 'title' | 'isTeam'> & {
+//     author: Pick<User, 'username' | 'name' | 'profilePicture'>;
+//   } & {
+//     preferences: Pick<Preferences, 'logo' | 'darkMode'>;
+//   };
+//   size?: 'xs' | 'sm' | 'lg' | 'xl';
+//   withProfileImage?: boolean;
+//   isPostPage?: boolean | null;
+// }) => {
+//   const blogTitle = generateBlogTitleWithoutDisplayTitle(publication);
 
-  return (
-    <h1 className="blog-main-logo">
-      <Link
-        className={twJoin(
-          'blog-logo focus-ring-base flex flex-row items-center', 'focus-ring-colors-base',
-          logoSizes[size],
-        )}
-        aria-label={`${blogTitle} home page`}
-        href={`/${isPostPage ? '?source=top_nav_blog_home' : ''}`}
-      >
-        <CustomImage
-          priority
-          className="block w-full"
-          src={resizeImage(theme === 'dark' ? darkLogoSrc : logoSrc, { w: 903.95, h: 250, c: 'thumb' })}
-          originalSrc={theme === 'dark' ? darkLogoSrc || '' : logoSrc || ''}
-          width={1000}
-          height={250}
-          alt={blogTitle}
-        />
-      </Link>
-    </h1>
-  );
-};
-
-const DefaultLogo = ({
-  publication,
-  size = 'lg',
-  withProfileImage = false,
-  isPostPage,
-}: {
-  publication: Pick<PublicationFragment, 'title' | 'isTeam'> & {
-    author: Pick<User, 'username' | 'name' | 'profilePicture'>;
-  } & {
-    preferences: Pick<Preferences, 'logo' | 'darkMode'>;
-  };
-  size?: 'xs' | 'sm' | 'lg' | 'xl';
-  withProfileImage?: boolean;
-  isPostPage?: boolean | null;
-}) => {
-  const blogTitle = generateBlogTitleWithoutDisplayTitle(publication);
-
-  return (
-    <h1
-      className={twJoin(
-        'blog-title',
-        textStyles[size],
-        'break-words font-heading font-semibold leading-snug md:font-bold','dark:text-white',
-      )}
-    >
-      <Link
-        href={`/${isPostPage ? '?source=top_nav_blog_home' : ''}`}
-        className={twJoin(
-          'focus-ring-base flex flex-row items-center','focus-ring-colors-base',
-        )}
-        aria-label={`${blogTitle} home page`}
-      >
-        {!publication.isTeam && publication.author.profilePicture && withProfileImage && (
-          <div className="mr-2 h-10 w-10 shrink-0 overflow-hidden rounded-full">
-            <CustomImage
-              priority
-              src={resizeImage(publication.author.profilePicture, { w: 400, h: 400, c: 'face' })}
-              originalSrc={publication.author.profilePicture}
-              blurDataURL={getBlurHash(resizeImage(publication.author.profilePicture, { w: 400, h: 400, c: 'face' }))}
-              width={400}
-              height={400}
-              alt={publication.author.name}
-            />
-          </div>
-        )}
-        {blogTitle}
-      </Link>
-    </h1>
-  );
-};
+//   return (
+//     <h1
+//       className={twJoin(
+//         'blog-title',
+//         textStyles[size],
+//         'break-words font-heading font-semibold leading-snug md:font-bold','dark:text-white',
+//       )}
+//     >
+//       <Link
+//         href={`/${isPostPage ? '?source=top_nav_blog_home' : ''}`}
+//         className={twJoin(
+//           'focus-ring-base flex flex-row items-center','focus-ring-colors-base',
+//         )}
+//         aria-label={`${blogTitle} home page`}
+//       >
+//         {!publication.isTeam && publication.author.profilePicture && withProfileImage && (
+//           <div className="mr-2 h-10 w-10 shrink-0 overflow-hidden rounded-full">
+//             <CustomImage
+//               priority
+//               src={resizeImage(publication.author.profilePicture, { w: 400, h: 400, c: 'face' })}
+//               originalSrc={publication.author.profilePicture}
+//               blurDataURL={getBlurHash(resizeImage(publication.author.profilePicture, { w: 400, h: 400, c: 'face' }))}
+//               width={400}
+//               height={400}
+//               alt={publication.author.name}
+//             />
+//           </div>
+//         )}
+//         {blogTitle}
+//       </Link>
+//     </h1>
+//   );
+// };
 
 // function PublicationLogo(props: PublicationLogoProps) {
 //   const { publication, size, withProfileImage, isPostPage } = props;
@@ -187,6 +152,141 @@ const DefaultLogo = ({
 
 // export default PublicationLogo;
 
+
+// components/publication-logo.tsx
+
+import { useEffect } from 'react';
+import { useTheme } from 'next-themes';
+import CustomImage from './custom-image';
+import Link from 'next/link';
+import { resizeImage, getBlurHash } from '../utils/image';
+import { Preferences, User, Maybe, PublicationFragment } from '../generated/graphql';
+import { twJoin } from 'tailwind-merge';
+import { generateBlogTitleWithoutDisplayTitle } from '../utils/commonUtils';
+
+type PublicationLogoProps = {
+  publication: Pick<PublicationFragment, 'title' | 'isTeam'> & {
+    author: Pick<User, 'username' | 'name' | 'profilePicture'>;
+  } & {
+    preferences: Pick<Preferences, 'logo' | 'darkMode'>;
+  };
+  size?: 'xs' | 'sm' | 'lg' | 'xl';
+  withProfileImage?: boolean;
+  isPostPage?: boolean | null;
+};
+
+const textStyles = {
+  xs: 'text-base text-left',
+  sm: 'text-lg md:text-xl text-left',
+  lg: 'text-xl md:text-2xl text-left',
+  xl: 'text-2xl text-center',
+} as const;
+
+const logoSizes = {
+  xs: 'w-44',
+  sm: 'w-44',
+  lg: 'w-64',
+  xl: 'w-64',
+} as const;
+
+const CustomLogo = ({ publication, logoSrc, size = 'lg', isPostPage }: {
+  publication: Pick<PublicationFragment, 'title'> & {
+    author: Pick<User, 'name'>;
+  } & {
+    preferences: Pick<Preferences, 'darkMode'>;
+  };
+  logoSrc: Maybe<string> | undefined;
+  size?: 'xs' | 'sm' | 'lg' | 'xl';
+  isPostPage?: boolean | null;
+}) => {
+  const { theme, setTheme } = useTheme();
+  const blogTitle = generateBlogTitleWithoutDisplayTitle(publication);
+  const darkLogoSrc = publication.preferences.darkMode?.logo;
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleChange = (event: MediaQueryListEvent) => {
+      setTheme(event.matches ? 'dark' : 'light');
+    };
+
+    mediaQuery.addEventListener('change', handleChange);
+    setTheme(mediaQuery.matches ? 'dark' : 'light');
+
+    return () => {
+      mediaQuery.removeEventListener('change', handleChange);
+    };
+  }, [setTheme]);
+
+  return (
+    <h1 className="blog-main-logo">
+      <Link
+        className={twJoin(
+          'blog-logo focus-ring-base flex flex-row items-center', 'focus-ring-colors-base',
+          logoSizes[size],
+        )}
+        aria-label={`${blogTitle} home page`}
+        href={`/${isPostPage ? '?source=top_nav_blog_home' : ''}`}
+      >
+        <CustomImage
+          priority
+          className="block w-full"
+          src={resizeImage(theme === 'dark' && darkLogoSrc ? darkLogoSrc : logoSrc, { w: 903.95, h: 250, c: 'thumb' })}
+          originalSrc={theme === 'dark' && darkLogoSrc ? darkLogoSrc : logoSrc || ''}
+          width={1000}
+          height={250}
+          alt={blogTitle}
+        />
+      </Link>
+    </h1>
+  );
+};
+
+const DefaultLogo = ({ publication, size = 'lg', withProfileImage = false, isPostPage }: {
+  publication: Pick<PublicationFragment, 'title' | 'isTeam'> & {
+    author: Pick<User, 'username' | 'name' | 'profilePicture'>;
+  } & {
+    preferences: Pick<Preferences, 'logo' | 'darkMode'>;
+  };
+  size?: 'xs' | 'sm' | 'lg' | 'xl';
+  withProfileImage?: boolean;
+  isPostPage?: boolean | null;
+}) => {
+  const blogTitle = generateBlogTitleWithoutDisplayTitle(publication);
+
+  return (
+    <h1
+      className={twJoin(
+        'blog-title',
+        textStyles[size],
+        'break-words font-heading font-semibold leading-snug md:font-bold', 'dark:text-white',
+      )}
+    >
+      <Link
+        href={`/${isPostPage ? '?source=top_nav_blog_home' : ''}`}
+        className={twJoin(
+          'focus-ring-base flex flex-row items-center', 'focus-ring-colors-base',
+        )}
+        aria-label={`${blogTitle} home page`}
+      >
+        {!publication.isTeam && publication.author.profilePicture && withProfileImage && (
+          <div className="mr-2 h-10 w-10 shrink-0 overflow-hidden rounded-full">
+            <CustomImage
+              priority
+              src={resizeImage(publication.author.profilePicture, { w: 400, h: 400, c: 'face' })}
+              originalSrc={publication.author.profilePicture}
+              blurDataURL={getBlurHash(resizeImage(publication.author.profilePicture, { w: 400, h: 400, c: 'face' }))}
+              width={400}
+              height={400}
+              alt={publication.author.name}
+            />
+          </div>
+        )}
+        {blogTitle}
+      </Link>
+    </h1>
+  );
+};
+
 function PublicationLogo(props: PublicationLogoProps) {
   const { publication, size, withProfileImage, isPostPage } = props;
   const { preferences } = publication;
@@ -197,12 +297,10 @@ function PublicationLogo(props: PublicationLogoProps) {
   const useLogo = false || preferences.logo;
   if (useLogo) {
     const logoSrc = preferences.logo;
-    const darkLogoSrc = preferences.darkMode?.logo;
     return (
       <CustomLogo
         publication={publication}
         logoSrc={logoSrc}
-        darkLogoSrc={darkLogoSrc}
         size={size}
         isPostPage={isPostPage}
       />
