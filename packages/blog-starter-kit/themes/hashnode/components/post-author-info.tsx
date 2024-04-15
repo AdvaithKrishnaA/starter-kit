@@ -13,7 +13,8 @@ function PostAuthorInfo(props: any) {
       <div className="mb-4 flex w-full flex-1 flex-row md:mb-0 ">
         <div className="mr-4 flex flex-row md:mb-0">
           <a
-            href={`https://hashnode.com/@${author.username}`}
+{/*             href={`https://hashnode.com/@${author.username}`} */}
+          href={`https://www.linkedin.com/in/advaithkrishnaa/`}
             className="block h-10 w-10 overflow-hidden rounded-full border dark:border-slate-800 md:h-14 md:w-14"
           >
             <CustomImage
