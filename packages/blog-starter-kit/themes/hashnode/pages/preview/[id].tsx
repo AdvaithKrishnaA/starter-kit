@@ -147,7 +147,7 @@ export default function Post({ publication, draft }: Props) {
 											<ProfileImage user={draft.author} width="200" height="200" hoverDisabled={true} />
 											</div>
 											<a
-											href={`https://hashnode.com/@${draft.author.username}`}
+											href={`https://www.linkedin.com/in/advaithkrishnaa/`}
 											className="font-medium text-slate-900 dark:text-white"
 											>
 											<span>{draft.author.name}</span>
