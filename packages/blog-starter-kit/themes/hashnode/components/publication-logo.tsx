@@ -58,7 +58,7 @@ const CustomLogo = ({ publication, logoSrc, size = 'lg', isPostPage }: {
         <CustomImage
           priority
           className="block w-full"
-          src={resizeImage(theme === 'dark' && darkLogoSrc ? darkLogoSrc : logoSrc, { w: 1000, h: 250, c: 'thumb' })}
+          src={resizeImage(theme === 'dark' && darkLogoSrc ? darkLogoSrc : logoSrc, { w: 903.95, h: 250, c: 'thumb' })}
           originalSrc={theme === 'dark' && darkLogoSrc ? darkLogoSrc : logoSrc || ''}
           width={1000}
           height={250}
@@ -120,7 +120,38 @@ const DefaultLogo = ({
   );
 };
 
-function PublicationLogo(props: PublicationLogoProps) {
+// function PublicationLogo(props: PublicationLogoProps) {
+//   const { publication, size, withProfileImage, isPostPage } = props;
+//   const { preferences } = publication;
+
+//   if (!publication) {
+//     return null;
+//   }
+//   const useLogo = false || preferences.logo;
+//   if (useLogo) {
+//     const logoSrc = preferences.logo;
+//     return (
+//       <CustomLogo
+//         publication={publication}
+//         logoSrc={logoSrc}
+//         size={size}
+//         isPostPage={isPostPage}
+//       />
+//     );
+//   }
+//   return (
+//     <DefaultLogo
+//       publication={publication}
+//       size={size}
+//       withProfileImage={withProfileImage}
+//       isPostPage={isPostPage}
+//     />
+//   );
+// }
+
+// export default PublicationLogo;
+
+unction PublicationLogo(props: PublicationLogoProps) {
   const { publication, size, withProfileImage, isPostPage } = props;
   const { preferences } = publication;
 
@@ -130,10 +161,12 @@ function PublicationLogo(props: PublicationLogoProps) {
   const useLogo = false || preferences.logo;
   if (useLogo) {
     const logoSrc = preferences.logo;
+    const darkLogoSrc = preferences.darkMode?.logo;
     return (
       <CustomLogo
         publication={publication}
         logoSrc={logoSrc}
+        darkLogoSrc={darkLogoSrc}
         size={size}
         isPostPage={isPostPage}
       />
