@@ -120,6 +120,7 @@ const DefaultLogo = ({ publication, size = 'lg', withProfileImage = false, isPos
 function PublicationLogo(props: PublicationLogoProps) {
   const { publication, size, withProfileImage, isPostPage } = props;
   const { preferences } = publication;
+  const { theme } = useTheme();
 
   if (!publication) {
     return null;
