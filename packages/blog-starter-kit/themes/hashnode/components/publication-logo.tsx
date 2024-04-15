@@ -212,8 +212,6 @@ const CustomLogo = ({
         href={`/${isPostPage ? '?source=top_nav_blog_home' : ''}`}
       >
         <svg
-          width="905"
-          height="251"
           viewBox="0 0 905 251"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
