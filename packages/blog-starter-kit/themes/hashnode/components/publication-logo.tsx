@@ -151,7 +151,7 @@ const DefaultLogo = ({
 
 // export default PublicationLogo;
 
-unction PublicationLogo(props: PublicationLogoProps) {
+function PublicationLogo(props: PublicationLogoProps) {
   const { publication, size, withProfileImage, isPostPage } = props;
   const { preferences } = publication;
 
