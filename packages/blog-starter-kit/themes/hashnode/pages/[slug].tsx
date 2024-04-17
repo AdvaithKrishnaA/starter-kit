@@ -268,3 +268,5 @@ export const getStaticPaths: GetStaticPaths = async () => {
 		fallback: 'blocking',
 	};
 };
+
+export const runtime = 'edge'
